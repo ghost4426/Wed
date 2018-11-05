@@ -6,16 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using WebAdmin.Models;
 
 namespace Service
 {
-    class Product
-    {
-        public int id { get; set; }
-        public string ProductName { get; set; }
-    }
 
-    class Program
+    class UserDataAccess
     {
         static void Main(string[] args)
         {
