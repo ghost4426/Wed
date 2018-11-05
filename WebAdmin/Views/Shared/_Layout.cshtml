@@ -47,23 +47,40 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                @*<li>
-            <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-            <ul class="nav child_menu">
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="index2.html">Dashboard2</a></li>
-                <li><a href="index3.html">Dashboard3</a></li>
-            </ul>
-        </li>*@
                                 <li class="active-sm">
-                                    <a>
-                                        <i class="fa fa-user"></i> User
-                                    </a>
+                                    <a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none;">
+                                        <li><a href="~/User/AddNew">Create New</a></li>
+                                        <li><a href="~/User/Management">Management</a></li>
+                                    </ul>
                                 </li>
                                 <li class="active-sm">
-                                    <a>
-                                        <i class="fas fa-home"></i> Store
-                                    </a>
+                                    <a><i class="fa fa-home"></i> Store <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none;">
+                                        <li><a href="~/Store/AddNew">Add</a></li>
+                                        <li><a href="~/Store/Management">Management</a></li>
+                                    </ul>
+                                </li>
+                                <li class="active-sm">
+                                    <a><i class="fa fa-table"></i> Table <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none;">
+                                        <li><a href="~/Table/AddNew">Add</a></li>
+                                        <li><a href="~/Table/Management">Management</a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="active-sm">
+                                    <a><i class="fa fa-cutlery"></i> Product <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none;">
+                                        <li><a href="~/Product/AddNew">Add</a></li>
+                                        <li><a href="~/Product/Management">Management</a></li>
+                                    </ul>
+                                </li>
+                                <li class="active-sm">
+                                    <a href="~/Order/"><i class="fa fa-list"></i> Order <span class="fa fa-chevron-right"></span></a>
+                                </li>
+                                <li class="active-sm">
+                                    <a href="~/Bill/"><i class="fa fa-file-text"></i> Bill <span class="fa fa-chevron-right"></span></a>
                                 </li>
                             </ul>
                         </div>
@@ -96,13 +113,6 @@
             <!-- page content -->
             <div class="right_col" role="main">
                 @RenderBody()
-                @*<div class="">
-                        <div class="page-title">
-                            <div class="title_left">
-                                <h3>Fixed Sidebar <small> Just add class <strong>menu_fixed</strong></small></h3>
-                            </div>
-                        </div>
-                    </div>*@
             </div>
             <!-- /page content -->
             <!-- footer content -->

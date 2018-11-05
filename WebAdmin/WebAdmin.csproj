@@ -48,6 +48,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -101,9 +104,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -149,11 +149,26 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BillController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
+    <Compile Include="Controllers\TableController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DataAccess\APIConfig.cs" />
+    <Compile Include="DataAccess\OrderDataAcess.cs" />
+    <Compile Include="DataAccess\ProductDataAcess.cs" />
+    <Compile Include="DataAccess\StoreDataAccess.cs" />
+    <Compile Include="DataAccess\TableDataAccess.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Store.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DataAccess\UserDataAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="build\css\custom.css" />
@@ -4423,10 +4438,19 @@
     <Content Include="vendors\validator\README.md" />
     <Content Include="vendors\validator\validator.jquery.json" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\User\AddNew.cshtml" />
+    <Content Include="Views\User\Management.cshtml" />
+    <Content Include="Views\Store\AddNew.cshtml" />
+    <Content Include="Views\Store\Management.cshtml" />
+    <Content Include="Views\Table\AddNew.cshtml" />
+    <Content Include="Views\Table\Management.cshtml" />
+    <Content Include="Views\Product\AddNew.cshtml" />
+    <Content Include="Views\Product\Management.cshtml" />
+    <Content Include="Views\Bill\Management.cshtml" />
+    <Content Include="Views\Order\Management.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="ViewLayer\" />
   </ItemGroup>
   <ItemGroup>
