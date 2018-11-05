@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "User Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var ProductList = ViewData["ProdutsList"] as List<WebAdmin.Models.Product>;
 }
 
 
@@ -15,24 +16,28 @@
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Full Name</th>
-                            <th>Address</th>
-                            <th>Store</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Image</th>
+                            <th>Price</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Admin</td>
-                            <td>Admin Name</td>
-                            <td>HCMC</td>
-                            <td>Store 1</td>
-                            <td>
-                                <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
-                            </td>
-                        </tr>
+                        @for (int i = 0; i < ProductList.Count; i++)
+                        {
+                            <tr>
+                                <td>@ProductList[i].ProductId</td>
+                                <td>@ProductList[i].ProductName</td>
+                                <td><img src="@ProductList[i].ImgPath" style="height:100px"/></td>
+                                <td>@ProductList[i].ProductPrice</td>
+                                <td>
+                                    <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
+                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
+                                </td>
+                            </tr>
+
+                        }
 
                     </tbody>
                 </table>
