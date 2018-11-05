@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAdmin.DataAccess;
 
 namespace WebAdmin.Controllers
 {
     public class ProductController : Controller
     {
+
+
         // GET: Product
         public ActionResult Index()
         {
@@ -20,6 +23,7 @@ namespace WebAdmin.Controllers
         }
         public ActionResult Management()
         {
+            ViewData["ProdutsList"] = ProductDataAcess.getListProductByStoreID(1);
             return View("Management");
         }
     }
