@@ -21,6 +21,7 @@ namespace WebAdmin.Controllers
         [HttpPost]
         public ActionResult Login(string txtUsername, string txtPassword)
         {
+
             return RedirectToAction("Index");
         }
 
