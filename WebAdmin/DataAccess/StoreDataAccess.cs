@@ -27,8 +27,8 @@ namespace WebAdmin.DataAccess
         public static void addStore(Store store)
         {
 
-           // String param = UserName + "&" + FullName + "&" + Address + "&" + StoreId + "&" + RoleId + "&" + Password;
-            string url = "http://" + APIConfig.IpAddress + ":3000/user/getAllUser";
+            String param = store.StoreName + "&" + store.PhoneNumber + "&" + store.Location + "&" + store.Province ;
+            string url = "http://" + APIConfig.IpAddress + ":3000/store-add/"+param;
             string json = APIConfig.CallApi(url, "POST");
 
         }

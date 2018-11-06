@@ -35,7 +35,8 @@ namespace WebAdmin.Controllers
             List<User> test = UserDataAcess.getListUser();
 
             Console.WriteLine(test);
-            ViewData["UserList"] = test; 
+            ViewData["UserList"] = test;
+            ViewData["StoreList"] = StoreDataAcess.getListStore();
            
             return View("Management");
         }
