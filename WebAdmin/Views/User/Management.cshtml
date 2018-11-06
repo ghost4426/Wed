@@ -26,16 +26,22 @@
                     <tbody>
                         @for (int i = 0; i < UserList.Count; i++)
                         {
+                      
                             <tr>
-                                <td>@UserList[i].Username</td>
-                                <td>@UserList[i].FullName</td>
-                                <td>@UserList[i].Address</td>
-                                <td>@UserList[i].StoreName</td>
+                                <td id="tdUsername_@i" value="@UserList[i].Username">@UserList[i].Username</td>
+                                <td id="tdFullName_@i" value="@UserList[i].FullName">@UserList[i].FullName</td>
+                      
+                                <td id="tdAddress_@i" value="@UserList[i].Address">@UserList[i].Address</td>
+                                <td id="tdStoreName_@i" value="@UserList[i].StoreName">@UserList[i].StoreName</td>
                                 <td>
-                                    <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
+                                    <button onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel" value="@i"><i class="fa fa-wrench"></i> Edit </button>
+                                    @using (Html.BeginForm("RemoveUser", "User", FormMethod.Post))
+                                    {
+                                        <button type="submit" class="btn btn-danger btn-xs" id="btnRemove" value="@UserList[i].Id"><i class="fa fa-trash-o"></i> Remove </button>
+                                    }
                                 </td>
                             </tr>
+
                         }
 
                     </tbody>
@@ -128,10 +134,10 @@
     });
 
     function setData(i) {
-        var id = $("#tdProductId_" + i).attr('value');
-        var name = $("#tdProductName_" + i).attr('value');
-        var price = $("#tdProductPrice_" + i).attr('value');
-        var type = $("#tdProductType_" + i).attr('value');
+        var id = $("#tdUsername_" + i).attr('value');
+        var name = $("#tdFullName_" + i).attr('value');
+        var price = $("#tdAddress_" + i).attr('value');
+        var type = $("#tdStoreName_" + i).attr('value');
 
         $("#ProductId").val(id);
         $("#ProductName").val(name);
