@@ -8,8 +8,20 @@ using System.Text;
 using System.Threading.Tasks;
 using WebAdmin.Models;
 
-namespace WebAdmin.DataAcess
-{
+using WebAdmin.DataAccess;
 
-   
+namespace WebAdmin.DataAccess
+{
+    public class UserDataAcess
+    {
+
+        public static List<User> getListUser()
+        {
+            string url = "http://" + APIConfig.IpAddress + ":3000/user/getAllUser";
+            string json = APIConfig.CallApi(url, "GET");
+            List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
+            return user;
+        }
+    }
+
 }

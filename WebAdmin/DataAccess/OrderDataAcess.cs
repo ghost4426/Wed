@@ -7,5 +7,6 @@ namespace WebAdmin.DataAccess
 {
     public class OrderDataAcess
     {
+
     }
 }

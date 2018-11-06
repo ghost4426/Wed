@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = "User Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var UserList = ViewData["UserList"] as List<WebAdmin.Models.User>;
 }
-@model dynamic
 
 
 <div class="row">
@@ -24,13 +24,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var user in Model)
+                        @for (int i = 0; i < UserList.Count; i++)
                         {
                             <tr>
-                                <td>@user.Role</td>
-                                <td>@user.FullName</td>
-                                <td>@user.Address</td>
-                                <td>@user.StoreName</td>
+                                <td>@UserList[i].Username</td>
+                                <td>@UserList[i].FullName</td>
+                                <td>@UserList[i].Address</td>
+                                <td>@UserList[i].StoreName</td>
                                 <td>
                                     <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
                                     <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>

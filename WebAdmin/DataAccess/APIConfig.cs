@@ -9,7 +9,7 @@ namespace WebAdmin.DataAccess
 {
     public class APIConfig
     {
-        public readonly static string IpAddress = "192.168.43.88";
+        public readonly static string IpAddress = "127.0.0.1";
 
 
         public static string CallApi(string url, string method)
