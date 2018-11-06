@@ -29,7 +29,7 @@ namespace WebAdmin.Controllers
         {
 
 
-            string text = APIConfig.CallApi("http://127.0.0.1:3000/user/getAllUser", "GET");
+     
             List<User> test = UserDataAcess.getListUser();
 
             Console.WriteLine(test);
@@ -62,7 +62,7 @@ namespace WebAdmin.Controllers
         [HttpPost]
         public ActionResult UpdateUser(User user)
         {
-        
+
             UserDataAcess.updateUser(user);
             return RedirectToAction("Management");
         }
@@ -70,7 +70,7 @@ namespace WebAdmin.Controllers
         [HttpPost]
         public ActionResult RemoveUser(User user)
         {
-
+            UserDataAcess.deleteUser(user);
             return RedirectToAction("Management");
         }
 

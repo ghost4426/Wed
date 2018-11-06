@@ -36,8 +36,17 @@ namespace WebAdmin.DataAccess
         public static void updateStore(Store store)
         {
 
+            String param = store.Location + "&" + store.PhoneNumber + "&" + store.StoreName + "&" + store.Province + "&" + store.Id;
+            string url = "http://" + APIConfig.IpAddress + ":3000/update-store/"+param;
+            string json = APIConfig.CallApi(url, "POST");
+
+        }
+
+        public static void deleteStore(Store store)
+        {
+
             //String param = store.StoreName + "&" + store.PhoneNumber + "&" + store.Location + "&" + store.Province;
-            string url = "http://" + APIConfig.IpAddress + ":3000/store-add/";
+            string url = "http://" + APIConfig.IpAddress + ":3000/removeStore/"+store.Id;
             string json = APIConfig.CallApi(url, "POST");
 
         }
