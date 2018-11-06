@@ -17,7 +17,7 @@ namespace Service
         {
             string url = "http://127.0.0.1:3000/products-type/SD0001F01T01&1";
             string json = GetReleases(url);
-           List<Product> products =  JsonConvert.DeserializeObject<List<Product>>(json);
+           List<Bill> products =  JsonConvert.DeserializeObject<List<Bill>>(json);
             Console.ReadLine();
         }
 
