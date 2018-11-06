@@ -2,6 +2,7 @@
     ViewBag.Title = "User Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@model dynamic
 
 
 <div class="row">
@@ -23,16 +24,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Admin</td>
-                            <td>Admin Name</td>
-                            <td>HCMC</td>
-                            <td>Store 1</td>
-                            <td>
-                                <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
-                            </td>
-                        </tr>
+                        @foreach (var user in Model)
+                        {
+                            <tr>
+                                <td>@user.Role</td>
+                                <td>@user.FullName</td>
+                                <td>@user.Address</td>
+                                <td>@user.StoreName</td>
+                                <td>
+                                    <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
+                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
+                                </td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>

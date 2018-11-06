@@ -12,11 +12,11 @@ namespace WebAdmin.DataAccess
         public readonly static string IpAddress = "192.168.43.88";
 
 
-        public static string GetReleases(string url)
+        public static string CallApi(string url, string method)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
 
-            request.Method = "GET";
+            request.Method = method;
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -32,7 +32,6 @@ namespace WebAdmin.DataAccess
                     }
                 }
             }
-
             return content;
         }
     }
