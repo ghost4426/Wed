@@ -27,18 +27,27 @@
 
                         @for (int i = 0; i < StoreList.Count; i++)
                         {
+                            <input type="text" id="tdId_@i" value="@StoreList[i].Id" hidden />
+
                             <tr>
-                                <td>@StoreList[i].StoreName</td>
-                                <td>@StoreList[i].Location</td>
-                                <td>@StoreList[i].Province</td>
-                                <td>@StoreList[i].PhoneNumber</td>
+
+                                <td id="tdStoreName_@i" value="@StoreList[i].StoreName">@StoreList[i].StoreName</td>
+                                <td id="tdLocation_@i" value="@StoreList[i].Location">@StoreList[i].Location</td>
+
+                                <td id="tdProvince_@i" value="@StoreList[i].Province">@StoreList[i].Province</td>
+                                <td id="tdPhoneNumber_@i" value="@StoreList[i].PhoneNumber">@StoreList[i].PhoneNumber</td>
+                        
                                 <td>
-                                    <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
+                                    <button onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel" value="@i"><i class="fa fa-wrench"></i> Edit </button>
+                                    @using (Html.BeginForm("RemoveStore", "Store", FormMethod.Post))
+                                    {
+                                        <button type="submit" class="btn btn-danger btn-xs" id="btnRemove" value="@StoreList[i].Id"><i class="fa fa-trash-o"></i> Remove </button>
+                                    }
                                 </td>
                             </tr>
+
                         }
-                        </tbody>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -55,59 +64,45 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+            @using (Html.BeginForm("UpdateStore", "Store", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+            {
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                            Full Name
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StoreName">
+                            StoreName
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
+                            <input type="hidden" id="Id" name="Id" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="StoreName" name="StoreName" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                            Address
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Location">
+                            Location
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="Location" name="Location" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                            Store
+                            Province
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="Province" name="Province" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                            Username <span class="required">*</span>
+                            PhoneNumber <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="UserName" name="UserName" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="PhoneNumber" name="PhoneNumber" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Re-Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
 
                 </div>
                 <div class="modal-footer">
@@ -115,8 +110,35 @@
                     <button class="btn btn-primary" type="reset">Reset</button>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-            </form>
+            }
 
-        </div>
+            </div>
     </div>
 </div>
+
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+            });
+
+    function setData(i) {
+
+        var id = $("#tdId_" + i).attr('value');
+                var storeName = $("#tdStoreName_" + i).attr('value');
+                var location = $("#tdLocation_" + i).attr('value');
+                var province = $("#tdProvince_" + i).attr('value');
+                var phoneNumber = $("#tdPhoneNumber_" + i).attr('value');
+
+           
+                 $("#Id").val(id);
+        $("#StoreName").val(storeName);
+        $("#Location").val(location);
+        $("#Province").val(province);
+        $("#PhoneNumber").val(phoneNumber);
+           
+
+
+            }
+</script>
+<script src="../vendors/jquery/dist/jquery.min.js"></script>

@@ -30,6 +30,14 @@ namespace WebAdmin.DataAccess
             string json = APIConfig.CallApi(url, "POST");
           
         }
+
+        public static void updateUser(User user)
+        {
+            //String param = UserName + "&" + FullName + "&" + Address + "&" + StoreId + "&" + RoleId + "&" + Password;
+            string url = "http://" + APIConfig.IpAddress + ":3000/user/";
+            string json = APIConfig.CallApi(url, "POST");
+
+        }
     }
 
 }

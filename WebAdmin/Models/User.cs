@@ -11,7 +11,7 @@ namespace WebAdmin.Models
         public string Username { get; set; }
         public string FullName { get; set; }
         public int RoleId { get; set; }
-        public string Role { get; set; }
+        public string RoleType { get; set; }
         public string Address { get; set; }
         public int StoreId { get; set; }
         public string StoreName { get; set; }

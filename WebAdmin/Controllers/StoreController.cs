@@ -33,11 +33,20 @@ namespace WebAdmin.Controllers
 
 
         [HttpPost]
-        public ActionResult AddNewStore(Store store, string Password)
+        public ActionResult AddNewStore(Store store)
         {
 
 
             StoreDataAcess.addStore(store);
+
+            return RedirectToAction("Management");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateStore(Store store)
+        {
+
+           
 
             return RedirectToAction("Management");
         }

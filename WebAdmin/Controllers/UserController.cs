@@ -28,8 +28,6 @@ namespace WebAdmin.Controllers
         public ActionResult Management()
         {
 
-            APIConfig.CallApi("http://127.0.0.1:3000/bills/3&3&3", "POST");
-            JavaScriptSerializer json_serializer = new JavaScriptSerializer();
 
             string text = APIConfig.CallApi("http://127.0.0.1:3000/user/getAllUser", "GET");
             List<User> test = UserDataAcess.getListUser();
@@ -59,6 +57,23 @@ namespace WebAdmin.Controllers
 
             return RedirectToAction("Management");
         }
+
+
+        [HttpPost]
+        public ActionResult UpdateUser(User user)
+        {
+        
+            UserDataAcess.updateUser(user);
+            return RedirectToAction("Management");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveUser(User user)
+        {
+
+            return RedirectToAction("Management");
+        }
+
 
     }
 }

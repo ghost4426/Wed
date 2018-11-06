@@ -32,5 +32,14 @@ namespace WebAdmin.DataAccess
             string json = APIConfig.CallApi(url, "POST");
 
         }
+
+        public static void updateStore(Store store)
+        {
+
+            //String param = store.StoreName + "&" + store.PhoneNumber + "&" + store.Location + "&" + store.Province;
+            string url = "http://" + APIConfig.IpAddress + ":3000/store-add/";
+            string json = APIConfig.CallApi(url, "POST");
+
+        }
     }
 }
