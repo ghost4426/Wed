@@ -4451,6 +4451,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\product\" />
     <Folder Include="ViewLayer\" />
   </ItemGroup>
   <ItemGroup>

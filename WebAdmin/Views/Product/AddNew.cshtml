@@ -6,78 +6,62 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>User<small>Create New User</small></h2>
+                <h2>Product<small>Add New Product</small></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <br>
-                @using (Html.BeginForm("AddNewUser", "User", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                @using (Html.BeginForm("AddNewProduct", "Product", FormMethod.Post, new { @class = "form-horizontal form-label-left", enctype = "multipart/form-data" }))
                 {
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                                    Full Name
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                                    Address
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductName">
+                            Product Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="ProductName" name="ProductName" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductPrice">
+                            Price <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="ProductPrice" name="ProductPrice" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                                    Store
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TypeId">
+                            Type <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="TypeId" id="TypeId" class="form-control col-md-7 col-xs-12">
+                                <option value="2">Food</option>
+                                <option value="1">Drink</option>
+                            </select>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                                    Username <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="UserName" name="Username" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Password <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Re-Password <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                                </div>
-                            </div>
-                            <div class="ln_solid"></div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <button class="btn btn-primary" type="reset">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
-                            </div>
-                    }
-                </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">
+                            Image <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" class="form-control-file" id="file" name="file" accept=".jpg">
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button class="btn btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     </div>
-    <script>
-        $(function () {
-            $("#datepicker").datepicker();
-        });
-    </script>
+</div>
+<script>
+   
+</script>

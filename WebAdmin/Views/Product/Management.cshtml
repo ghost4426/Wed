@@ -20,22 +20,28 @@
                             <th>Name</th>
                             <th>Image</th>
                             <th>Price</th>
+                            <th>Type</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @for (int i = 0; i < ProductList.Count; i++)
                         {
-                            <tr>
-                                <td>@ProductList[i].ProductId</td>
-                                <td>@ProductList[i].ProductName</td>
-                                <td><img src="@ProductList[i].ImgPath" style="height:100px"/></td>
-                                <td>@ProductList[i].ProductPrice</td>
-                                <td>
-                                    <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
-                                </td>
-                            </tr>
+                            var img = "https://i.imgur.com/" + ProductList[i].ImgPath + ".jpg";
+                        <tr>
+                            <td id="tdProductId_@i" value="@ProductList[i].ProductId">@ProductList[i].ProductId</td>
+                            <td id="tdProductName_@i" value="@ProductList[i].ProductName">@ProductList[i].ProductName</td>
+                            <td id="tdProductImg_@i" value="@ProductList[i].ImgPath"><img src="@img" style="height:100px" /></td>
+                            <td id="tdProductPrice_@i" value="@ProductList[i].ProductPrice">@ProductList[i].ProductPrice</td>
+                            <td id="tdProductType_@i" value="@ProductList[i].TypeId">@ProductList[i].Type</td>
+                            <td>
+                                <button onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel"  value="@i"><i class="fa fa-wrench"></i> Edit </button>
+                                @using (Html.BeginForm("RemoveProduct", "Product", FormMethod.Post))
+                                {
+                                    <button type="submit" class="btn btn-danger btn-xs" id="btnRemove" value="@ProductList[i].ProductId"><i class="fa fa-trash-o"></i> Remove </button>
+                                }
+                            </td>
+                        </tr>
 
                         }
 
@@ -56,68 +62,74 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                            Full Name
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
+            @using (Html.BeginForm("UpdateProduct", "Product", FormMethod.Post, new { @class = "form-horizontal form-label-left", enctype = "multipart/form-data" }))
+            {
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <input type="hidden" value="" name="ProductId" />
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductName">
+                                Product Name <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="ProductName" required name="ProductName" class="form-control col-md-7 col-xs-12">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                            Address
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductPrice">
+                                Price <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" id="ProductPrice" required name="ProductPrice" class="form-control col-md-7 col-xs-12">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                            Store
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TypeId">
+                                Type <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <select name="TypeId" id="TypeId" class="form-control col-md-7 col-xs-12">
+                                    <option value="2">Food</option>
+                                    <option value="1">Drink</option>
+                                </select>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                            Username <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="UserName" name="UserName" required="required" class="form-control col-md-7 col-xs-12">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">
+                                Image <span class="required">*</span>
+                            </label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="file" class="form-control-file" id="file" name="file" accept=".jpg">
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Re-Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                     </div>
+            }
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </form>
-
-        </div>
+            </div>
     </div>
-</div>
+</div> 
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        
+    });
+
+    function setData(i) {
+        var id = $("#tdProductId_" + i).attr('value');
+        var name = $("#tdProductName_" + i).attr('value');
+        var price = $("#tdProductPrice_" + i).attr('value');
+        var type = $("#tdProductType_" + i).attr('value');
+
+        $("#ProductId").val(id);
+        $("#ProductName").val(name);
+        $("#ProductPrice").val(price);
+        $("#TypeId").val(type);
+    }
+</script>
+<script src="../vendors/jquery/dist/jquery.min.js"></script>

@@ -12,5 +12,7 @@ namespace WebAdmin.Models
         public string ImgPath { get; set; }
         public string ProductName { get; set; }
         public int ProductPrice { get; set; }
+        public int TypeId { get; set; }
+        public string Type { get; set; }
     }
 }
