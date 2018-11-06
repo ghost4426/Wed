@@ -9,7 +9,7 @@ namespace WebAdmin.DataAccess
 {
     public class APIConfig
     {
-        public readonly static string IpAddress = "192.168.43.88";
+        public readonly static string IpAddress = "localhost";
 
 
         public static string GetReleases(string url)
