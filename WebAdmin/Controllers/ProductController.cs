@@ -68,9 +68,7 @@ namespace WebAdmin.Controllers
         public ActionResult RemoveProduct(Product product)
         {
 
-
             ProductDataAcess.DeleteProduct(product);
-
             return RedirectToAction("Management");
 
         }
