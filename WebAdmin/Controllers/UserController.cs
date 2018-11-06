@@ -29,10 +29,8 @@ namespace WebAdmin.Controllers
         {
 
 
-            string text = APIConfig.CallApi("http://127.0.0.1:3000/user/getAllUser", "GET");
             List<User> test = UserDataAcess.getListUser();
 
-            Console.WriteLine(test);
             ViewData["UserList"] = test;
             ViewData["StoreList"] = StoreDataAcess.getListStore();
            
