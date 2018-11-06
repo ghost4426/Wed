@@ -19,13 +19,7 @@ namespace WebAdmin.DataAccess
             return products;
         }
 
-        public static bool AddNewProduct(Product product, int storeId)
-        {
-            string imgKey = UploadImageToImgur(product.ImgPath);
-            string apiRoute = "/addproduct/" + storeId + "&" + imgKey + "&" + product.ProductName + "&" + product.ProductPrice + "&" + product.TypeId;
-            APIConfig.CallApi(apiRoute, "POST");
-            return true;
-        }
+        
 
         public static string UploadImageToImgur(string url)
         {
@@ -34,7 +28,6 @@ namespace WebAdmin.DataAccess
             w.Headers.Add("Authorization", "Client-ID " + clientID);
             var values = new NameValueCollection
             {
-                { "key", "433a1bf4743dd8d7845629b95b5ca1b4" },
                 { "image", Convert.ToBase64String(File.ReadAllBytes(url)) }
              };
 
@@ -43,6 +36,45 @@ namespace WebAdmin.DataAccess
             var data = JsonConvert.DeserializeObject<JSONResult>(result);
             return data.Data.id;
         }
+
+        public static bool AddNewProduct(Product product, int storeId)
+        {
+            string imgKey = UploadImageToImgur(product.ImgPath);
+            string apiRoute = "/addproduct/" 
+                      + storeId 
+                + "&" + imgKey 
+                + "&" + product.ProductName
+                + "&" + product.ProductPrice 
+                + "&" + product.TypeId;
+            APIConfig.CallApi(apiRoute, "POST");
+            return true;
+        }
+
+        public static bool UpdateProduct(Product product)
+        {
+            if(product.ImgPath != null)
+            {
+                product.ImgKey = UploadImageToImgur(product.ImgPath);
+            }
+            string apiRoute = "/updateProduct/" 
+                                      + product.ProductId
+                                + "&" + product.ImgKey
+                                + "&" + product.ProductName 
+                                + "&" + product.ProductPrice 
+                                + "&" + product.IsAvailable
+                                + "&" + product.TypeId;
+            APIConfig.CallApi(apiRoute, "POST");
+            return true;
+        }
+
+        public static bool DeleteProduct(Product product)
+        {
+            string apiRoute = "/removeProduct/" + product.ProductId;
+                               
+            APIConfig.CallApi(apiRoute, "POST");
+            return true;
+        }
+
 
     }
     class Data

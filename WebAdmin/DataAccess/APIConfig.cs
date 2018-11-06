@@ -14,7 +14,6 @@ namespace WebAdmin.DataAccess
         public static string CallApi(string apiRoute, string method)
         {
             var request = (HttpWebRequest)WebRequest.Create("http://" + IpAddress + ":3000" + apiRoute);
-
             request.Method = method;
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

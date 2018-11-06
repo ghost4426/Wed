@@ -15,7 +15,7 @@ namespace WebAdmin.Controllers
         // GET: Product
         public ActionResult Index()
         {
-            return View("Management");
+            return RedirectToAction("Management");
         }
 
         public ActionResult AddNew()
@@ -45,5 +45,36 @@ namespace WebAdmin.Controllers
             return View("AddNew");
 
         }
+
+        [HttpPost]
+        public ActionResult UpdateProduct(Product product, HttpPostedFileBase file)
+        {
+
+            if (file != null)
+            {
+                string pic = Path.GetFileName(file.FileName);
+                string path = Path.Combine(Server.MapPath("~/images/product"), pic);
+                file.SaveAs(path);
+                product.ImgPath = path;
+            }
+
+            ProductDataAcess.UpdateProduct(product);
+
+            return RedirectToAction("Management");
+
+        }
+
+        [HttpPost]
+        public ActionResult RemoveProduct(Product product)
+        {
+
+
+            ProductDataAcess.DeleteProduct(product);
+
+            return RedirectToAction("Management");
+
+        }
+
+
     }
 }

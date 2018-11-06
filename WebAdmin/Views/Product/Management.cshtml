@@ -21,27 +21,39 @@
                             <th>Image</th>
                             <th>Price</th>
                             <th>Type</th>
+                            <th>IsAvailable</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         @for (int i = 0; i < ProductList.Count; i++)
                         {
-                            var img = "https://i.imgur.com/" + ProductList[i].ImgPath + ".jpg";
-                        <tr>
-                            <td id="tdProductId_@i" value="@ProductList[i].ProductId">@ProductList[i].ProductId</td>
-                            <td id="tdProductName_@i" value="@ProductList[i].ProductName">@ProductList[i].ProductName</td>
-                            <td id="tdProductImg_@i" value="@ProductList[i].ImgPath"><img src="@img" style="height:100px" /></td>
-                            <td id="tdProductPrice_@i" value="@ProductList[i].ProductPrice">@ProductList[i].ProductPrice</td>
-                            <td id="tdProductType_@i" value="@ProductList[i].TypeId">@ProductList[i].Type</td>
-                            <td>
-                                <button onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel"  value="@i"><i class="fa fa-wrench"></i> Edit </button>
-                                @using (Html.BeginForm("RemoveProduct", "Product", FormMethod.Post))
-                                {
-                                    <button type="submit" class="btn btn-danger btn-xs" id="btnRemove" value="@ProductList[i].ProductId"><i class="fa fa-trash-o"></i> Remove </button>
-                                }
-                            </td>
-                        </tr>
+                            var isVal = "";
+                            if (ProductList[i].IsAvailable == 0)
+                            {
+                                isVal = "True";
+                            }
+                            else
+                            {
+                                isVal = "False";
+                            }
+                            var img = "https://i.imgur.com/" + ProductList[i].ImgKey + ".jpg";
+                            <tr>
+                                <td id="tdProductId_@i" value="@ProductList[i].ProductId">@ProductList[i].ProductId</td>
+                                <td id="tdProductName_@i" value="@ProductList[i].ProductName">@ProductList[i].ProductName</td>
+                                <td id="tdProductImg_@i" value="@ProductList[i].ImgKey"><img src="@img" style="height:100px" /></td>
+                                <td id="tdProductPrice_@i" value="@ProductList[i].ProductPrice">@ProductList[i].ProductPrice</td>
+                                <td id="tdProductType_@i" value="@ProductList[i].TypeId">@ProductList[i].Type</td>
+                                <td id="tdIsAvailable_@i" value="@ProductList[i].IsAvailable">@isVal</td>
+                                <td>
+                                    @using (Html.BeginForm("RemoveProduct", "Product", FormMethod.Post))
+                                    {
+                                        <input type="hidden" value="@ProductList[i].ProductId" name="ProductId" />
+                                        <a onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel" value="@i"><i class="fa fa-wrench"></i> Edit </a>
+                                        <button type="submit" class="btn btn-danger btn-xs" id="btnRemove"><i class="fa fa-trash-o"></i> Remove </button>
+                                    }
+                                </td>
+                            </tr>
 
                         }
 
@@ -64,60 +76,72 @@
             </div>
             @using (Html.BeginForm("UpdateProduct", "Product", FormMethod.Post, new { @class = "form-horizontal form-label-left", enctype = "multipart/form-data" }))
             {
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <input type="hidden" value="" name="ProductId" />
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductName">
-                                Product Name <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="ProductName" required name="ProductName" class="form-control col-md-7 col-xs-12">
-                            </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" value="" id="ProductId" name="ProductId" />
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductName">
+                            Product Name <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="ProductName" required name="ProductName" class="form-control col-md-7 col-xs-12">
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductPrice">
-                                Price <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" id="ProductPrice" required name="ProductPrice" class="form-control col-md-7 col-xs-12">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TypeId">
-                                Type <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <select name="TypeId" id="TypeId" class="form-control col-md-7 col-xs-12">
-                                    <option value="2">Food</option>
-                                    <option value="1">Drink</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">
-                                Image <span class="required">*</span>
-                            </label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="file" class="form-control-file" id="file" name="file" accept=".jpg">
-                            </div>
-                        </div>
-
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-success">Submit</button>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ProductPrice">
+                            Price <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="ProductPrice" required name="ProductPrice" class="form-control col-md-7 col-xs-12">
+                        </div>
                     </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TypeId">
+                            Type
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="TypeId" id="TypeId" class="form-control col-md-7 col-xs-12">
+                                <option value="2">Food</option>
+                                <option value="1">Drink</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="IsAvailable">
+                            Avalible
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="IsAvailable" id="IsAvailable" class="form-control col-md-7 col-xs-12">
+                                <option value="1">Avalible</option>
+                                <option value="0">Not Avalible</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="file">
+                            Image
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="hidden" name="ImgKey" id="ImgKey" value="" />
+                            <input type="file" class="form-control-file" id="file" name="file" accept=".jpg">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
             }
 
-            </div>
+        </div>
     </div>
-</div> 
+</div>
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function () {
-        
+
     });
 
     function setData(i) {
@@ -125,11 +149,19 @@
         var name = $("#tdProductName_" + i).attr('value');
         var price = $("#tdProductPrice_" + i).attr('value');
         var type = $("#tdProductType_" + i).attr('value');
+        var imgKey = $("#tdProductImg_" + i).attr('value');
+        var isVal = $("#tdIsAvailable_" + i).attr('value');
 
         $("#ProductId").val(id);
         $("#ProductName").val(name);
         $("#ProductPrice").val(price);
         $("#TypeId").val(type);
+        $("#ImgKey").val(imgKey);
+        if (isVal == 1) {
+            $("#IsAvailable").val(0)
+        } else {
+            $("#IsAvailable").val(1)
+        }
     }
 </script>
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
