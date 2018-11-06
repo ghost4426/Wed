@@ -43,7 +43,7 @@
                                     <button onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel" value="@i"><i class="fa fa-wrench"></i> Edit </button>
                                     @using (Html.BeginForm("RemoveUser", "User", FormMethod.Post))
                                     {
-                                        <input type="text" id="tdId_@i" value="@UserList[i].Id" hidden />
+                                        <input type="text" id="tdId_@i" value="@UserList[i].Id" name="Id" hidden />
                                         <button type="submit" class="btn btn-danger btn-xs" id="btnRemove" value="@UserList[i].Id"><i class="fa fa-trash-o"></i> Remove </button>
                                     }
                                 </td>
@@ -97,31 +97,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TypeId">
-                        Store <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="StoreId" id="StoreId" class="form-control col-md-7 col-xs-12">
-                            @for (int i = 0; i < StoreList.Count; i++)
-                            {
-                                <option value="@StoreList[i].Id">@StoreList[i].StoreName</option>
-                            }
-                        </select>
-                    </div>
-                </div>
+          
 
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="RoleId">
-                        Role <span class="required">*</span>
-                    </label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <select name="RoleId" id="RoleId" class="form-control col-md-7 col-xs-12">
-                            <option value="1">Admin</option>
-                            <option value="2">Owner</option>
-                        </select>
-                    </div>
-                </div>
+            
 
             </div>
                 <div class="modal-footer">
@@ -146,16 +124,16 @@
                 var id = $("#tdId_" + i).attr('value');
                 var fullname = $("#tdFullName_" + i).attr('value');
                 var address = $("#tdAddress_" + i).attr('value');
-                var storeId = $("#tdStoreName_" + i).attr('value');
            
-                var roleId = $("#tdRoleId_" + i).attr('value');
+           
+            
    
 
                  $("#Id").val(id);
                  $("#FullName").val(fullname);
                 $("#Address").val(address);
-                $("#StoreId").val(storeId);
-                $("#RoleId").val(roleId);
+            
+            
                 
              
             }

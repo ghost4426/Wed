@@ -41,6 +41,7 @@
                                     <button onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel" value="@i"><i class="fa fa-wrench"></i> Edit </button>
                                     @using (Html.BeginForm("RemoveStore", "Store", FormMethod.Post))
                                     {
+                                        <input type="text" id="tdId_@i" value="@StoreList[i].Id" name="Id" hidden />
                                         <button type="submit" class="btn btn-danger btn-xs" id="btnRemove" value="@StoreList[i].Id"><i class="fa fa-trash-o"></i> Remove </button>
                                     }
                                 </td>
