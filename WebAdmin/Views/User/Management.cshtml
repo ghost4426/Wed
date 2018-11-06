@@ -26,7 +26,7 @@
                     <tbody>
                         @for (int i = 0; i < UserList.Count; i++)
                         {
-                      
+                                
                             <tr>
                                 <td id="tdUsername_@i" value="@UserList[i].Username">@UserList[i].Username</td>
                                 <td id="tdFullName_@i" value="@UserList[i].FullName">@UserList[i].FullName</td>
@@ -89,14 +89,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                            Username <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="UserName" name="UserName" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">
