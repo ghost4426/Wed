@@ -157,6 +157,7 @@
     <Compile Include="Controllers\TableController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataAccess\APIConfig.cs" />
+    <Compile Include="DataAccess\BillDataAccess.cs" />
     <Compile Include="DataAccess\OrderDataAcess.cs" />
     <Compile Include="DataAccess\ProductDataAcess.cs" />
     <Compile Include="DataAccess\StoreDataAccess.cs" />
@@ -164,6 +165,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Bill.cs" />
+    <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\User.cs" />
