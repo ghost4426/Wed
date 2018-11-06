@@ -20,10 +20,8 @@ namespace WebAdmin.Controllers
         
         public ActionResult Management()
         {
-            List<Order> test = OrderDataAcess.getListOrder();
 
-            Console.WriteLine(test);
-            ViewData["OrderList"] = OrderDataAcess.getListOrder();
+            ViewData["OrdersList"] = OrderDataAcess.getOrderDetailByStoreId(1);
             return View("Management");
         }
     }

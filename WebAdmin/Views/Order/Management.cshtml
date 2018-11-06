@@ -16,15 +16,31 @@
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Full Name</th>
-                            <th>Address</th>
-                            <th>Store</th>
+                            <th>OrderId</th>
+                            <th>Table Name</th>
+                            <th>Product Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Date Order</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                    hihi
+                        @for (int i = 0; i < OrderList.Count; i++)
+                        {
+                            <tr>
+                                <td>@OrderList[i].OrderId</td>
+                                <td>@OrderList[i].TableName</td>
+                                <td>@OrderList[i].ProductName</td>
+                                <td>@OrderList[i].Quantity</td>
+                                <td>@OrderList[i].Price</td>
+                                <td>@OrderList[i].DateCreate</td>
+                                <td>
+                                    <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
+                                    <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
+                                </td>
+                            </tr>
+                        }
                         </tbody>
                 </table>
             </div>

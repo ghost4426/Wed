@@ -21,6 +21,7 @@ namespace WebAdmin.DataAccess
             string json = APIConfig.CallApi(url, "GET");
             List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
             return user;
+
         }
 
         public static void addUser(String UserName,String FullName,String Address,int StoreId,int RoleId,String Password)
