@@ -120,3 +120,21 @@
         </div>
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+
+    });
+
+    function setData(i) {
+        var id = $("#tdProductId_" + i).attr('value');
+        var name = $("#tdProductName_" + i).attr('value');
+        var price = $("#tdProductPrice_" + i).attr('value');
+        var type = $("#tdProductType_" + i).attr('value');
+
+        $("#ProductId").val(id);
+        $("#ProductName").val(name);
+        $("#ProductPrice").val(price);
+        $("#TypeId").val(type);
+    }
+</script>
