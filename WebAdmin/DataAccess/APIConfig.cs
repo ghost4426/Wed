@@ -33,29 +33,5 @@ namespace WebAdmin.DataAccess
 
             return content;
         }
-
-        public static string PostReleases(string apiRoute)
-        {
-            var request = (HttpWebRequest)WebRequest.Create("http://" + IpAddress + ":3000" + apiRoute);
-
-            request.Method = "POST";
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            var content = string.Empty;
-
-            using (var response = (HttpWebResponse)request.GetResponse())
-            {
-                using (var stream = response.GetResponseStream())
-                {
-                    using (var sr = new StreamReader(stream))
-                    {
-                        content = sr.ReadToEnd();
-                    }
-                }
-            }
-
-            return content;
-        }
     }
 }

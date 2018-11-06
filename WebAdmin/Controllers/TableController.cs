@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using WebAdmin.DataAccess;
+using WebAdmin.Models;
 
 namespace WebAdmin.Controllers
 {
@@ -20,8 +18,35 @@ namespace WebAdmin.Controllers
         }
         public ActionResult Management()
         {
+            ViewData["TableList"] = TableDataAccess.getListTableByStoreId(1);
             return View("Management");
         }
 
+        [HttpPost]
+        public ActionResult AddNewTable(Table table)
+        {
+
+            TableDataAccess.NewTable(table, 1);
+            return View("AddNew");
+
+        }
+
+        [HttpPost]
+        public ActionResult UpdateTable(Table table)
+        {
+
+            TableDataAccess.UpdateTable(table);
+
+            return RedirectToAction("Management");
+
+        }
+
+        [HttpPost]
+        public ActionResult RemoveTable(Table table)
+        {
+
+            return RedirectToAction("Management");
+
+        }
     }
 }

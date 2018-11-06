@@ -11,8 +11,8 @@ namespace WebAdmin.DataAccess
     {
         public static List<Bill> getListBillByStoreID(int StoreId)
         {
-            string url = "http://" + APIConfig.IpAddress + ":3000/bill-info/" + StoreId;
-            string json = APIConfig.GetReleases(url);
+            string apiRoute = "/bill-info/" + StoreId;
+            string json = APIConfig.CallApi(apiRoute, "GET");
             List<Bill> bills = JsonConvert.DeserializeObject<List<Bill>>(json);
             return bills;
         }

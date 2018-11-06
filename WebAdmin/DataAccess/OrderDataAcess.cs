@@ -11,8 +11,8 @@ namespace WebAdmin.DataAccess
     {
         public static List<Order> getOrderDetailByStoreId(int StoreId)
         {
-            string url = "http://" + APIConfig.IpAddress + ":3000/order-info/" + StoreId;
-            string json = APIConfig.GetReleases(url);
+            string url = "/order-info/" + StoreId;
+            string json = APIConfig.CallApi(url, "GET");
             List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(json);
             return orders;
         }
