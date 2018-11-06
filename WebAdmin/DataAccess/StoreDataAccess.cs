@@ -18,10 +18,19 @@ namespace WebAdmin.DataAccess
 
         public static List<Store> getListStore()
         {
-            string url = "http://" + APIConfig.IpAddress + ":3000/store/getAllStore";
+            string url = "http://" + APIConfig.IpAddress + ":3000/store";
             string json = APIConfig.CallApi(url, "GET");
             List<Store> store = JsonConvert.DeserializeObject<List<Store>>(json);
             return store;
+        }
+
+        public static void addStore(Store store)
+        {
+
+           // String param = UserName + "&" + FullName + "&" + Address + "&" + StoreId + "&" + RoleId + "&" + Password;
+            string url = "http://" + APIConfig.IpAddress + ":3000/user/getAllUser";
+            string json = APIConfig.CallApi(url, "POST");
+
         }
     }
 }

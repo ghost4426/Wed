@@ -11,59 +11,45 @@
             </div>
             <div class="x_content">
                 <br>
-                @using (Html.BeginForm("AddNewUser", "User", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                @using (Html.BeginForm("AddNewStore", "Store", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                 {
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                                    Full Name
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="StoreName">
+                                   StoreName
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="StoreName" name="StoreName" class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                                    Address
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Location">
+                                    Location
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="Location" name="Location" class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                                    Store
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="PhoneNumber">
+                                    PhoneNumber
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                                    Username <span class="required">*</span>
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Province">
+                                    Province <span class="required">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="UserName" name="Username" required="required" class="form-control col-md-7 col-xs-12">
+                                    <input type="text" id="Province" name="Province" required="required" class="form-control col-md-7 col-xs-12">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Password <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Re-Password <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                                </div>
-                            </div>
+                          
+
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

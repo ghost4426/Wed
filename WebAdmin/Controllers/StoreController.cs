@@ -30,5 +30,16 @@ namespace WebAdmin.Controllers
 
             return View("Management");
         }
+
+
+        [HttpPost]
+        public ActionResult AddNewStore(Store store, string Password)
+        {
+
+
+            StoreDataAcess.addStore(store);
+
+            return RedirectToAction("Management");
+        }
     }
 }
