@@ -42,6 +42,10 @@ namespace WebAdmin.Controllers
         public ActionResult AddNewUser(User user, string Password)
         {
 
+            String userName = user.Username;
+            String fullName = user.FullName;
+            String address = user.Address;
+            String passWord = Password;
 
             return RedirectToAction("Management");
         }

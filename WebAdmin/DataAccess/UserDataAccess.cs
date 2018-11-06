@@ -22,6 +22,14 @@ namespace WebAdmin.DataAccess
             List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
             return user;
         }
+
+        public static void addUser()
+        {
+           // String param = "";
+            string url = "http://" + APIConfig.IpAddress + ":3000/user/getAllUser";
+            string json = APIConfig.CallApi(url, "POST");
+          
+        }
     }
 
 }
