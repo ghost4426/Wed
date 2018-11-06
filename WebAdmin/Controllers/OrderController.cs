@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using WebAdmin.Models;
 using WebAdmin.DataAccess;
 
 namespace WebAdmin.Controllers
@@ -18,6 +20,7 @@ namespace WebAdmin.Controllers
         
         public ActionResult Management()
         {
+
             ViewData["OrdersList"] = OrderDataAcess.getOrderDetailByStoreId(1);
             return View("Management");
         }

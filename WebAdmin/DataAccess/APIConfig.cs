@@ -34,11 +34,11 @@ namespace WebAdmin.DataAccess
             return content;
         }
 
-        public static string PostReleases(string apiRoute)
+        public static string CallApi(string url, string method)
         {
             var request = (HttpWebRequest)WebRequest.Create("http://" + IpAddress + ":3000" + apiRoute);
 
-            request.Method = "POST";
+            request.Method = method;
             request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -54,7 +54,6 @@ namespace WebAdmin.DataAccess
                     }
                 }
             }
-
             return content;
         }
     }

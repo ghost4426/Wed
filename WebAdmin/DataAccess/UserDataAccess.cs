@@ -8,43 +8,37 @@ using System.Text;
 using System.Threading.Tasks;
 using WebAdmin.Models;
 
-namespace Service
-{
+using WebAdmin.DataAccess;
 
-    class UserDataAccess
+namespace WebAdmin.DataAccess
+{
+    public class UserDataAcess
     {
-        static void Main(string[] args)
+
+        public static List<User> getListUser()
         {
-            string url = "http://127.0.0.1:3000/products-type/SD0001F01T01&1";
-            string json = GetReleases(url);
-           List<Bill> products =  JsonConvert.DeserializeObject<List<Bill>>(json);
-            Console.ReadLine();
+            string url = "http://" + APIConfig.IpAddress + ":3000/user-getAllUser";
+            string json = APIConfig.CallApi(url, "GET");
+            List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
+            return user;
+
         }
 
-
-
-        public static string GetReleases(string url)
+        public static void addUser(String UserName,String FullName,String Address,int StoreId,int RoleId,String Password)
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
+            String param = UserName +"&"+ FullName + "&"+ Address + "&"+ StoreId + "&"+ RoleId + "&"+ Password;
+            string url = "http://" + APIConfig.IpAddress + ":3000/user/"+param;
+            string json = APIConfig.CallApi(url, "POST");
+          
+        }
 
-            request.Method = "GET";
-            request.AutomaticDecompression = DecompressionMethods.Deflate | DecompressionMethods.GZip;
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+        public static void updateUser(User user)
+        {
+            //String param = UserName + "&" + FullName + "&" + Address + "&" + StoreId + "&" + RoleId + "&" + Password;
+            string url = "http://" + APIConfig.IpAddress + ":3000/user/";
+            string json = APIConfig.CallApi(url, "POST");
 
-            var content = string.Empty;
-
-            using (var response = (HttpWebResponse)request.GetResponse())
-            {
-                using (var stream = response.GetResponseStream())
-                {
-                    using (var sr = new StreamReader(stream))
-                    {
-                        content = sr.ReadToEnd();
-                    }
-                }
-            }
-
-            return content;
         }
     }
+
 }
