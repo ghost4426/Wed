@@ -23,9 +23,9 @@ namespace WebAdmin.DataAccess
             return user;
         }
 
-        public static void addUser()
+        public static void addUser(String UserName,String FullName,String Address,int StoreId,int RoleId,String Password)
         {
-           // String param = "";
+            String param = UserName +"&"+ FullName + "&"+ Address + "&"+ StoreId + "&"+ RoleId + "&"+ Password;
             string url = "http://" + APIConfig.IpAddress + ":3000/user/getAllUser";
             string json = APIConfig.CallApi(url, "POST");
           

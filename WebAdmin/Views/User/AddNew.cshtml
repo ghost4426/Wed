@@ -1,5 +1,8 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var StoreList = ViewData["StoreList"] as List<WebAdmin.Models.Store>;
+
 }
 
 <div class="row">
@@ -13,66 +16,83 @@
                 <br>
                 @using (Html.BeginForm("AddNewUser", "User", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
                 {
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                                    Full Name
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                                    Address
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
+                            Full Name
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
+                            Address
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                                    Store
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TypeId">
+                            Role <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="RoleId" id="RoleId" class="form-control col-md-7 col-xs-12">
+                                <option value="1">Admin</option>
+                                <option value="2">Owner</option>
+                            </select>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                                    Username <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="UserName" name="Username" required="required" class="form-control col-md-7 col-xs-12">
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TypeId">
+                            Store <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <select name="StoreId" id="StoreId" class="form-control col-md-7 col-xs-12">
+                                @for (int i = 0; i < StoreList.Count; i++)
+                                {
+                                    <option value="@StoreList[i].Id">@StoreList[i].StoreName</option>
+                                }
+                                </select>
+                        </div>
+                    </div>
 
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Password <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                                    Re-Password <span class="required">*</span>
-                                </label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                                </div>
-                            </div>
-                            <div class="ln_solid"></div>
-                            <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                    <button class="btn btn-primary" type="reset">Reset</button>
-                                    <button type="submit" class="btn btn-success">Submit</button>
-                                </div>
-                            </div>
-                    }
-                </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
+                            Username <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="UserName" name="Username" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Password <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                            Re-Password <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
+                        </div>
+                    </div>
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button class="btn btn-primary" type="reset">Reset</button>
+                            <button type="submit" class="btn btn-success">Submit</button>
+                        </div>
+                    </div>
+                }
+            </div>
             </div>
         </div>
     </div>

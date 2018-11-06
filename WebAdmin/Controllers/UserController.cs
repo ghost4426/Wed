@@ -14,10 +14,14 @@ namespace WebAdmin.Controllers
         // GET: User
         public ActionResult Index()
         {
+
             return View("Management");
         }
 
-        public ActionResult AddNew() { 
+        public ActionResult AddNew() {
+
+            List<Store> test = StoreDataAcess.getListStore();
+            ViewData["StoreList"] = test;
             return View("AddNew");
 
         }
@@ -46,6 +50,11 @@ namespace WebAdmin.Controllers
             String fullName = user.FullName;
             String address = user.Address;
             String passWord = Password;
+            int storeId = user.StoreId;
+            int roleId = user.RoleId;
+
+            UserDataAcess.addUser(userName, fullName, address, storeId, roleId, passWord);
+
 
             return RedirectToAction("Management");
         }
