@@ -7,6 +7,7 @@ namespace WebAdmin.Models
 {
     public class Order
     {
+
         public int OrderId { get; set; }
         public string TableName { get; set; }
         public string ProductName { get; set; }

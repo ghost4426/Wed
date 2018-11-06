@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using WebAdmin.Models;
+using WebAdmin.DataAccess;
 
 namespace WebAdmin.Controllers
 {
@@ -12,22 +14,64 @@ namespace WebAdmin.Controllers
         // GET: User
         public ActionResult Index()
         {
+
             return View("Management");
         }
 
-        public ActionResult AddNew()
-        {
+        public ActionResult AddNew() {
+
+            List<Store> test = StoreDataAcess.getListStore();
+            ViewData["StoreList"] = test;
             return View("AddNew");
+
         }
         public ActionResult Management()
         {
+
+
+            string text = APIConfig.CallApi("http://127.0.0.1:3000/user/getAllUser", "GET");
+            List<User> test = UserDataAcess.getListUser();
+
+            Console.WriteLine(test);
+            ViewData["UserList"] = test;
+            ViewData["StoreList"] = StoreDataAcess.getListStore();
+           
             return View("Management");
         }
+
+   
 
         [HttpPost]
         public ActionResult AddNewUser(User user, string Password)
         {
-            return RedirectToAction("UserManagement");
+
+            String userName = user.Username;
+            String fullName = user.FullName;
+            String address = user.Address;
+            String passWord = Password;
+            int storeId = user.StoreId;
+            int roleId = user.RoleId;
+
+            UserDataAcess.addUser(userName, fullName, address, storeId, roleId, passWord);
+
+
+            return RedirectToAction("Management");
+        }
+
+
+        [HttpPost]
+        public ActionResult UpdateUser(User user)
+        {
+        
+            UserDataAcess.updateUser(user);
+            return RedirectToAction("Management");
+        }
+
+        [HttpPost]
+        public ActionResult RemoveUser(User user)
+        {
+
+            return RedirectToAction("Management");
         }
 
 

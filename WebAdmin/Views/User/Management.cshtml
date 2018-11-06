@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "User Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var UserList = ViewData["UserList"] as List<WebAdmin.Models.User>;
+
+    var StoreList = ViewData["StoreList"] as List<WebAdmin.Models.Store>;
 }
 
 
@@ -19,20 +22,34 @@
                             <th>Full Name</th>
                             <th>Address</th>
                             <th>Store</th>
+                            <th>Role</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Admin</td>
-                            <td>Admin Name</td>
-                            <td>HCMC</td>
-                            <td>Store 1</td>
-                            <td>
-                                <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
-                            </td>
-                        </tr>
+                        @for (int i = 0; i < UserList.Count; i++)
+                        {
+                          
+                          
+                            <tr>
+
+                                <td id="tdUsername_@i" value="@UserList[i].Username">@UserList[i].Username</td>
+                                <td id="tdFullName_@i" value="@UserList[i].FullName">@UserList[i].FullName</td>
+
+                                <td id="tdAddress_@i" value="@UserList[i].Address">@UserList[i].Address</td>
+                                <td id="tdStoreName_@i" value="@UserList[i].StoreId">@UserList[i].StoreName</td>
+                                <td id="tdRoleId_@i" value="@UserList[i].RoleId">@UserList[i].RoleType</td>
+                                <td>
+                                    <button onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editUserModel" value="@i"><i class="fa fa-wrench"></i> Edit </button>
+                                    @using (Html.BeginForm("RemoveUser", "User", FormMethod.Post))
+                                    {
+                                        <input type="text" id="tdId_@i" value="@UserList[i].Id" name="Id" hidden />
+                                        <button type="submit" class="btn btn-danger btn-xs" id="btnRemove" value="@UserList[i].Id"><i class="fa fa-trash-o"></i> Remove </button>
+                                    }
+                                </td>
+                            </tr>
+
+                        }
 
                     </tbody>
                 </table>
@@ -51,68 +68,74 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                            Full Name
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                            Address
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                            Store
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
+            @using (Html.BeginForm("UpdateUser", "User", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+            {
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Id">
 
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                            Username <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="UserName" name="UserName" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Re-Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
-
                 </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
+                        Full Name
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="hidden" id="Id" name="Id" class="form-control col-md-7 col-xs-12">
+                        <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
+                        Address
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+
+          
+
+            
+
+            </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     <button class="btn btn-primary" type="reset">Reset</button>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-            </form>
 
-        </div>
+            }
+
+            </div>
     </div>
 </div>
+
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+            });
+
+            function setData(i) {
+                var id = $("#tdId_" + i).attr('value');
+                var fullname = $("#tdFullName_" + i).attr('value');
+                var address = $("#tdAddress_" + i).attr('value');
+           
+           
+            
+   
+
+                 $("#Id").val(id);
+                 $("#FullName").val(fullname);
+                $("#Address").val(address);
+            
+            
+                
+             
+            }
+</script>
+<script src="../vendors/jquery/dist/jquery.min.js"></script>

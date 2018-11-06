@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net;
 using WebAdmin.Models;
+using WebAdmin.DataAccess;
 
 namespace WebAdmin.DataAccess
 {
@@ -13,6 +14,7 @@ namespace WebAdmin.DataAccess
 
         public static List<Product> GetListProductByStoreID(int StoreId)
         {
+
             string apiRoute = "/products-store/" + StoreId;
             string json = APIConfig.CallApi(apiRoute, "GET");
             List<Product> products = JsonConvert.DeserializeObject<List<Product>>(json);
