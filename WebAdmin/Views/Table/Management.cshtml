@@ -1,6 +1,7 @@
 ﻿@{
-    ViewBag.Title = "User Management";
+    ViewBag.Title = "Table Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var TableList = ViewData["TableList"] as List<WebAdmin.Models.Table>;
 }
 
 
@@ -8,31 +9,40 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Table</h2>
+                <h2>Product</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Full Name</th>
-                            <th>Address</th>
-                            <th>Store</th>
+                            <th>Key</th>
+                            <th>Name</th>
+                            <th>IsAvailable</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Admin</td>
-                            <td>Admin Name</td>
-                            <td>HCMC</td>
-                            <td>Store 1</td>
-                            <td>
-                                <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
-                            </td>
-                        </tr>
+                        @for (int i = 0; i < TableList.Count; i++)
+                        {
+                            var isVal = "";
+                            if (TableList[i].IsAvailable == 1)
+                            {
+                                isVal = "True";
+                            }
+                            else
+                            {
+                                isVal = "False";
+                            }
+                            <tr>
+                                <td id="tdProductId_@i" value="@TableList[i].TableId">@TableList[i].TableKey</td>
+                                <td id="tdProductName_@i" value="@TableList[i].TableName">@TableList[i].TableName</td>
+                                <td id="tdIsAvailable_@i" value="@TableList[i].IsAvailable">@isVal</td>
+                                <td>
+                                        <a onclick="setData(@i)" class="btn btn-info btn-xs btnEdit" data-toggle="modal" data-target="#editModel" value="@i"><i class="fa fa-wrench"></i> Edit </a>
+                                </td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
@@ -42,77 +52,62 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="editUserModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Update Table</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+            @using (Html.BeginForm("UpdateTable", "Table", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+            {
                 <div class="modal-body">
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                            Full Name
+                        <input type="hidden" value="" id="TableId" name="TableId" />
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="TableName">
+                            Table Name <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="TableName" required name="TableName" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                            Address
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="IsAvailable">
+                            Avalible
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
+                            <select name="IsAvailable" id="IsAvailable" class="form-control col-md-7 col-xs-12">
+                                <option value="1">Avalible</option>
+                                <option value="0">Not Avalible</option>
+                            </select>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                            Store
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                            Username <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="UserName" name="UserName" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Re-Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="reset">Reset</button>
                     <button type="submit" class="btn btn-success">Submit</button>
                 </div>
-            </form>
+            }
 
         </div>
     </div>
 </div>
+<script src="../vendors/jquery/dist/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+    });
+
+    function setData(i) {
+        var id = $("#tdProductId_" + i).attr('value');
+        var name = $("#tdProductName_" + i).attr('value');
+        var isVal = $("#tdIsAvailable_" + i).attr('value');
+
+        $("#TableId").val(id);
+        $("#TableName").val(name);
+        $("#IsAvailable").val(isVal)
+    }
+</script>
+<script src="../vendors/jquery/dist/jquery.min.js"></script>

@@ -5,14 +5,12 @@ using System.Web;
 
 namespace WebAdmin.Models
 {
-    public class Order
+    public class Bill
     {
-
-        public int OrderId { get; set; }
+        public int Id { get; set; }
+        public int TableId { get; set; }
         public string TableName { get; set; }
-        public string ProductName { get; set; }
-        public int Quantity { get; set; }
-        public int Price { get; set; }
         public string DateCreate { get; set; }
+        public int Total { get; set; }
     }
 }

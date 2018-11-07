@@ -17,16 +17,21 @@ namespace WebAdmin.DataAccess
 
         public static List<User> getListUser()
         {
+
             string url = "/user-getalluser";
+
             string json = APIConfig.CallApi(url, "GET");
             List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
             return user;
+
         }
 
         public static void addUser(String UserName,String FullName,String Address,int StoreId,int RoleId,String Password)
         {
             String param = UserName +"&"+ FullName + "&"+ Address + "&"+ StoreId + "&"+ RoleId + "&"+ Password;
+
             string url = "/user-add/" + param;
+
             string json = APIConfig.CallApi(url, "POST");
           
         }
@@ -42,7 +47,9 @@ namespace WebAdmin.DataAccess
         public static void deleteUser(User user)
         {
             //String param = UserName + "&" + FullName + "&" + Address + "&" + StoreId + "&" + RoleId + "&" + Password;
+
             string url = "/removeUser/"+user.Id;
+
             string json = APIConfig.CallApi(url, "POST");
 
         }

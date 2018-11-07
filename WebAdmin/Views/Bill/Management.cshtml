@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "User Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var BillList = ViewData["BillsList"] as List<WebAdmin.Models.Bill>;
 }
 
 
@@ -15,26 +16,27 @@
                 <table id="datatable" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th>Username</th>
-                            <th>Full Name</th>
-                            <th>Address</th>
-                            <th>Store</th>
+                            <th>Bill Id</th>
+                            <th>Table Id</th>
+                            <th>Table Name</th>
+                            <th>Date Create</th>
+                            <th>Total</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
+                            @for (int i = 0; i < BillList.Count; i++)
+                            {
                         <tr>
-                            <td>Admin</td>
-                            <td>Admin Name</td>
-                            <td>HCMC</td>
-                            <td>Store 1</td>
-                            <td>
-                                <a href="#" class="btn btn-info btn-xs" data-toggle="modal" data-target="#editUserModel"><i class="fa fa-wrench"></i> Edit </a>
-                                <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Remove </a>
-                            </td>
+                            <td>@BillList[i].Id</td>
+                            <td>@BillList[i].TableId</td>
+                            <td>@BillList[i].TableName</td>
+                            <td>@BillList[i].DateCreate</td>
+                            <td>@BillList[i].Total</td>
+                            <td></td>
                         </tr>
-
-                    </tbody>
+                        }
+                        </tbody>
                 </table>
             </div>
         </div>

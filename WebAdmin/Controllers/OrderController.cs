@@ -14,16 +14,8 @@ namespace WebAdmin.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            return View("Management");
-        }
+            ViewData["OrdersList"] = OrderDataAcess.getOrderDetailByStoreId(1);
 
-        
-        public ActionResult Management()
-        {
-            List<Order> test = OrderDataAcess.getListOrder();
-
-            Console.WriteLine(test);
-            ViewData["OrderList"] = OrderDataAcess.getListOrder();
             return View("Management");
         }
     }

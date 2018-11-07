@@ -1,11 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Service
 {
@@ -19,9 +21,20 @@ namespace Service
     {
         static void Main(string[] args)
         {
-            string url = "http://192.168.1.21:3000/products-type/SD0001F01T01&1";
-            string json = GetReleases(url);
-           List<Product> products =  JsonConvert.DeserializeObject<List<Product>>(json);
+
+            var w = new WebClient();
+            string clientID = "4b3c2fc5719236f";
+            w.Headers.Add("Authorization", "Client-ID " + clientID);
+            string url = "E:/Study/Project/WebAdmin/WebAdmin/images/mastercard.png";
+            var values = new NameValueCollection
+            {
+                { "key", "433a1bf4743dd8d7845629b95b5ca1b4" },
+                { "image", Convert.ToBase64String(File.ReadAllBytes(url)) }
+             };
+
+            byte[] response = w.UploadValues("https://api.imgur.com/3/image", values);
+            string result = System.Text.Encoding.UTF8.GetString(response);
+            var jObject = JsonConvert.DeserializeObject<JSONResult>(result);
             Console.ReadLine();
         }
 

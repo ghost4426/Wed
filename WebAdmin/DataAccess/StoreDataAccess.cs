@@ -46,7 +46,9 @@ namespace WebAdmin.DataAccess
         {
 
             //String param = store.StoreName + "&" + store.PhoneNumber + "&" + store.Location + "&" + store.Province;
+
             string url = "/removeStore/"+store.Id;
+
             string json = APIConfig.CallApi(url, "POST");
 
         }
