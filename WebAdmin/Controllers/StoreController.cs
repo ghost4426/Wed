@@ -46,6 +46,7 @@ namespace WebAdmin.Controllers
         public ActionResult UpdateStore(Store store)
         {
 
+
             StoreDataAcess.updateStore(store);
 
             return RedirectToAction("Management");

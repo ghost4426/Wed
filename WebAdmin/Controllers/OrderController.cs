@@ -14,7 +14,8 @@ namespace WebAdmin.Controllers
         // GET: Order
         public ActionResult Index()
         {
-            ViewData["OrdersList"] = OrderDataAcess.getOrderDetailByStoreId(1);
+            User UserCurrent = Session["UserCurrent"] as User;
+            ViewData["OrdersList"] = OrderDataAcess.getOrderDetailByStoreId(UserCurrent.StoreId);
 
             return View("Management");
         }

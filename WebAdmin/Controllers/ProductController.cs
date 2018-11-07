@@ -24,21 +24,22 @@ namespace WebAdmin.Controllers
         }
         public ActionResult Management()
         {
-            ViewData["ProdutsList"] = ProductDataAcess.GetListProductByStoreID(1);
+            User UserCurrent = Session["UserCurrent"] as User;
+            ViewData["ProdutsList"] = ProductDataAcess.GetListProductByStoreID(UserCurrent.StoreId);
             return View("Management");
         }
 
         [HttpPost]
         public ActionResult AddNewProduct(Product product, HttpPostedFileBase file)
         {
-
+            User UserCurrent = Session["UserCurrent"] as User;
             if (file != null)
             {
                 string pic = Path.GetFileName(file.FileName);
                 string path = Path.Combine(Server.MapPath("~/images/product"), pic);
                 file.SaveAs(path);
                 product.ImgPath = path;
-                ProductDataAcess.AddNewProduct(product, 1);
+                ProductDataAcess.AddNewProduct(product, UserCurrent.StoreId);
                 ViewBag.msg = "Success";
             }
 

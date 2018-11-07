@@ -18,15 +18,16 @@ namespace WebAdmin.Controllers
         }
         public ActionResult Management()
         {
-            ViewData["TableList"] = TableDataAccess.getListTableByStoreId(1);
+            User UserCurrent = Session["UserCurrent"] as User;
+            ViewData["TableList"] = TableDataAccess.getListTableByStoreId(UserCurrent.StoreId);
             return View("Management");
         }
 
         [HttpPost]
         public ActionResult AddNewTable(Table table)
         {
-
-            TableDataAccess.NewTable(table, 1);
+            User UserCurrent = Session["UserCurrent"] as User;
+            TableDataAccess.NewTable(table, UserCurrent.StoreId);
             return View("AddNew");
 
         }
