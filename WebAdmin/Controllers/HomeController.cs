@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebAdmin.DataAccess;
+using WebAdmin.Models;
 
 namespace WebAdmin.Controllers
 {
@@ -19,10 +21,17 @@ namespace WebAdmin.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(string txtUsername, string txtPassword)
+        public ActionResult Login(string username, string password)
         {
+           User user = HomeDataAccess.CheckLogin(username, password);
+            if(user != null)
+            {
+                Session["UserCurrent"] = HomeDataAccess.CheckLogin(username, password);
+                return RedirectToAction("Index");
 
-            return RedirectToAction("Index");
+            }
+            ViewBag.msgError = "Wrong username or password";
+            return RedirectToAction("Login");
         }
 
         public ActionResult About()

@@ -46,8 +46,6 @@ namespace WebAdmin.Controllers
         public ActionResult UpdateStore(Store store)
         {
 
-           
-
             return RedirectToAction("Management");
         }
     }
