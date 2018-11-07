@@ -46,7 +46,17 @@ namespace WebAdmin.Controllers
         public ActionResult UpdateStore(Store store)
         {
 
-           
+            StoreDataAcess.updateStore(store);
+
+            return RedirectToAction("Management");
+        }
+
+
+        [HttpPost]
+        public ActionResult RemoveStore(Store store)
+        {
+
+            StoreDataAcess.deleteStore(store);
 
             return RedirectToAction("Management");
         }

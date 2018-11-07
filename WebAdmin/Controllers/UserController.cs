@@ -29,6 +29,7 @@ namespace WebAdmin.Controllers
         {
 
 
+
             List<User> test = UserDataAcess.getListUser();
 
             ViewData["UserList"] = test;
@@ -60,7 +61,7 @@ namespace WebAdmin.Controllers
         [HttpPost]
         public ActionResult UpdateUser(User user)
         {
-        
+
             UserDataAcess.updateUser(user);
             return RedirectToAction("Management");
         }
@@ -68,7 +69,7 @@ namespace WebAdmin.Controllers
         [HttpPost]
         public ActionResult RemoveUser(User user)
         {
-
+            UserDataAcess.deleteUser(user);
             return RedirectToAction("Management");
         }
 
