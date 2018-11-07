@@ -17,7 +17,7 @@ namespace WebAdmin.DataAccess
 
         public static List<User> getListUser()
         {
-            string url = "http://" + APIConfig.IpAddress + ":3000/user-getalluser";
+            string url = "/user-getalluser";
             string json = APIConfig.CallApi(url, "GET");
             List<User> user = JsonConvert.DeserializeObject<List<User>>(json);
             return user;
@@ -26,7 +26,7 @@ namespace WebAdmin.DataAccess
         public static void addUser(String UserName,String FullName,String Address,int StoreId,int RoleId,String Password)
         {
             String param = UserName +"&"+ FullName + "&"+ Address + "&"+ StoreId + "&"+ RoleId + "&"+ Password;
-            string url = "http://" + APIConfig.IpAddress + ":3000/user-add/" + param;
+            string url = "/user-add/" + param;
             string json = APIConfig.CallApi(url, "POST");
           
         }
@@ -34,7 +34,7 @@ namespace WebAdmin.DataAccess
         public static void updateUser(User user)
         {
             String param = user.FullName + "&" + user.Address + "&" + user.Id;
-            string url = "http://" + APIConfig.IpAddress + ":3000/update-user/" + param;
+            string url = "/update-user/" + param;
             string json = APIConfig.CallApi(url, "POST");
 
         }
@@ -42,7 +42,7 @@ namespace WebAdmin.DataAccess
         public static void deleteUser(User user)
         {
             //String param = UserName + "&" + FullName + "&" + Address + "&" + StoreId + "&" + RoleId + "&" + Password;
-            string url = "http://" + APIConfig.IpAddress + ":3000/removeUser/"+user.Id;
+            string url = "/removeUser/"+user.Id;
             string json = APIConfig.CallApi(url, "POST");
 
         }

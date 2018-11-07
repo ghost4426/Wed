@@ -18,7 +18,7 @@ namespace WebAdmin.DataAccess
 
         public static List<Store> getListStore()
         {
-            string url = "http://" + APIConfig.IpAddress + ":3000/store";
+            string url = "/store";
             string json = APIConfig.CallApi(url, "GET");
             List<Store> store = JsonConvert.DeserializeObject<List<Store>>(json);
             return store;
@@ -28,7 +28,7 @@ namespace WebAdmin.DataAccess
         {
 
             String param = store.StoreName + "&" + store.PhoneNumber + "&" + store.Location + "&" + store.Province ;
-            string url = "http://" + APIConfig.IpAddress + ":3000/store-add/"+param;
+            string url = "/store-add/"+param;
             string json = APIConfig.CallApi(url, "POST");
 
         }
@@ -37,7 +37,7 @@ namespace WebAdmin.DataAccess
         {
 
             String param = store.Location + "&" + store.PhoneNumber + "&" + store.StoreName + "&" + store.Province + "&" + store.Id;
-            string url = "http://" + APIConfig.IpAddress + ":3000/update-store/"+param;
+            string url = "/update-store/"+param;
             string json = APIConfig.CallApi(url, "POST");
 
         }
@@ -46,7 +46,7 @@ namespace WebAdmin.DataAccess
         {
 
             //String param = store.StoreName + "&" + store.PhoneNumber + "&" + store.Location + "&" + store.Province;
-            string url = "http://" + APIConfig.IpAddress + ":3000/removeStore/"+store.Id;
+            string url = "/removeStore/"+store.Id;
             string json = APIConfig.CallApi(url, "POST");
 
         }
