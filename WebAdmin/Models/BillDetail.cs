@@ -6,13 +6,17 @@ using System.Web;
 
 namespace WebAdmin.Models
 {
-    public class Bill
+    public class BillDetail
     {
+
+
         public int Id { get; set; }
-        public int TableId { get; set; }
-        public string TableName { get; set; }
-        public DateTime DateCreate { get; set; }
+        public string ProductName { get; set; }
+        public int Quantity { get; set; }
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
-        public int Total { get; set; }
+        public int ProductPrice { get; set; }
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        public int Price { get; set; }
+
     }
 }

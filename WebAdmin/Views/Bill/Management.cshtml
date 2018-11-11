@@ -17,7 +17,6 @@
                     <thead>
                         <tr>
                             <th>Bill Id</th>
-                            <th>Table Id</th>
                             <th>Table Name</th>
                             <th>Date Create</th>
                             <th>Total</th>
@@ -29,11 +28,18 @@
                             {
                         <tr>
                             <td>@BillList[i].Id</td>
-                            <td>@BillList[i].TableId</td>
                             <td>@BillList[i].TableName</td>
-                            <td>@BillList[i].DateCreate</td>
-                            <td>@BillList[i].Total</td>
-                            <td></td>
+                            <td>@string.Format("{0:g}", @BillList[i].DateCreate)</td>
+                            <td>@string.Format("{0:C0}", @BillList[i].Total)</td>
+                            <td>
+                                @using (Html.BeginForm("Detail", "Bill", FormMethod.Post))
+                                {
+                                    <input type="hidden" value="@BillList[i].Id" name="BillId" />
+                                    <button type="submit" class="btn btn-primary btn-xs"> Detail </button>
+
+                                }
+
+                            </td>
                         </tr>
                         }
                         </tbody>
@@ -43,78 +49,3 @@
     </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="editUserModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="FullName">
-                            Full Name
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="FullName" name="FullName" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Address">
-                            Address
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Address" name="Address" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Store">
-                            Store
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="Store" name="StoreId" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="UserName">
-                            Username <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input type="text" id="UserName" name="UserName" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Password" name="Password" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">
-                            Re-Password <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <input id="Repassword" name="Repassword" class="form-control col-md-7 col-xs-12" required="required" type="text">
-                        </div>
-                    </div>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button class="btn btn-primary" type="reset">Reset</button>
-                    <button type="submit" class="btn btn-success">Submit</button>
-                </div>
-            </form>
-
-        </div>
-    </div>
-</div>

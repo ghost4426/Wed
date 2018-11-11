@@ -17,5 +17,21 @@ namespace WebAdmin.DataAccess
             return bills;
         }
 
+        public static List<BillDetail> getListBillDetailByBillId(int BillId)
+        {
+            string apiRoute = "/billdetail/" + BillId;
+            string json = APIConfig.CallApi(apiRoute, "GET");
+            List<BillDetail> bills = JsonConvert.DeserializeObject<List<BillDetail>>(json);
+            return bills;
+        }
+
+        public static Bill getBillByBillId(int BillId)
+        {
+            string apiRoute = "/getBill/" + BillId;
+            string json = APIConfig.CallApi(apiRoute, "GET");
+            List<Bill> bill = JsonConvert.DeserializeObject<List<Bill>>(json);
+            return bill[0];
+        }
+
     }
 }

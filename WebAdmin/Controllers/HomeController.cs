@@ -23,8 +23,8 @@ namespace WebAdmin.Controllers
         [HttpPost]
         public ActionResult Login(string username, string password)
         {
-           User user = HomeDataAccess.CheckLogin(username, password);
-            if(user != null)
+            User user = HomeDataAccess.CheckLogin(username, password);
+            if (user != null)
             {
                 Session["UserCurrent"] = HomeDataAccess.CheckLogin(username, password);
                 return RedirectToAction("Index");
@@ -32,6 +32,13 @@ namespace WebAdmin.Controllers
             }
             ViewBag.msgError = "Wrong username or password";
             return RedirectToAction("Login");
+        }
+
+        public ActionResult Logout()
+        {
+
+            Session["UserCurrent"] = null;
+            return View("Login");
         }
 
         public ActionResult About()

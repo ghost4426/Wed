@@ -167,6 +167,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Bill.cs" />
+    <Compile Include="Models\BillDetail.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\Store.cs" />
@@ -4453,6 +4454,7 @@
     <Content Include="Views\Product\Management.cshtml" />
     <Content Include="Views\Bill\Management.cshtml" />
     <Content Include="Views\Order\Management.cshtml" />
+    <Content Include="Views\Bill\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

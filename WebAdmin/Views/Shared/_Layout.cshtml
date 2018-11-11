@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+@{ var UserCurrent = Session["UserCurrent"] as WebAdmin.Models.User;}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -26,7 +28,7 @@
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
                         <a href="~/Home/" class="site_title">
-                            <img src="~/images/logo.jpg" style="width:46px;height:44px"/> <span>Fast Order</span>
+                            <img src="~/images/logo.jpg" style="width:46px;height:44px" /> <span>Fast Order</span>
                         </a>
                     </div>
                     <div class="clearfix"></div>
@@ -37,7 +39,7 @@
                         </div>
                         <div class="profile_info">
                             <span>Welcome,</span>
-                            <h2>Admin</h2>
+                            <h2>@UserCurrent.FullName</h2>
                         </div>
                     </div>
                     <!-- /menu profile quick info -->
@@ -47,41 +49,48 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                <li class="active-sm">
-                                    <a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none;">
-                                        <li><a href="~/User/AddNew">Create New</a></li>
-                                        <li><a href="~/User/Management">Management</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active-sm">
-                                    <a><i class="fa fa-home"></i> Store <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none;">
-                                        <li><a href="~/Store/AddNew">Add</a></li>
-                                        <li><a href="~/Store/Management">Management</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active-sm">
-                                    <a><i class="fa fa-table"></i> Table <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none;">
-                                        <li><a href="~/Table/AddNew">Add</a></li>
-                                        <li><a href="~/Table/Management">Management</a></li>
-                                    </ul>
-                                </li>
+                                @if (UserCurrent.RoleId == 1)
+                                {
+                                    <li class="active-sm">
+                                        <a><i class="fa fa-user"></i> User <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none;">
+                                            <li><a href="~/User/AddNew">Create New</a></li>
+                                            <li><a href="~/User/Management">Management</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active-sm">
+                                        <a><i class="fa fa-home"></i> Store <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none;">
+                                            <li><a href="~/Store/AddNew">Add</a></li>
+                                            <li><a href="~/Store/Management">Management</a></li>
+                                        </ul>
+                                    </li>
+                                }
 
-                                <li class="active-sm">
-                                    <a><i class="fa fa-cutlery"></i> Product <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none;">
-                                        <li><a href="~/Product/AddNew">Add</a></li>
-                                        <li><a href="~/Product/Management">Management</a></li>
-                                    </ul>
-                                </li>
-                                <li class="active-sm">
-                                    <a href="~/Order/"><i class="fa fa-list"></i> Order <span class="fa fa-chevron-right"></span></a>
-                                </li>
-                                <li class="active-sm">
-                                    <a href="~/Bill/"><i class="fa fa-file-text"></i> Bill <span class="fa fa-chevron-right"></span></a>
-                                </li>
+                                @if (UserCurrent.RoleId == 2)
+                                {
+                                    <li class="active-sm">
+                                        <a><i class="fa fa-table"></i> Table <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none;">
+                                            <li><a href="~/Table/AddNew">Add</a></li>
+                                            <li><a href="~/Table/Management">Management</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li class="active-sm">
+                                        <a><i class="fa fa-cutlery"></i> Product <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none;">
+                                            <li><a href="~/Product/AddNew">Add</a></li>
+                                            <li><a href="~/Product/Management">Management</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="active-sm">
+                                        <a href="~/Order/"><i class="fa fa-list"></i> Order <span class="fa fa-chevron-right"></span></a>
+                                    </li>
+                                    <li class="active-sm">
+                                        <a href="~/Bill/"><i class="fa fa-file-text"></i> Bill <span class="fa fa-chevron-right"></span></a>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -98,7 +107,7 @@
                         <ul class="nav navbar-nav navbar-right">
                             <li class="">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="~/images/img.jpg" alt="">Admin
+                                    <img src="~/images/img.jpg" alt="">@UserCurrent.FullName
                                     <span class=" fa fa-angle-down"></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-usermenu pull-right">

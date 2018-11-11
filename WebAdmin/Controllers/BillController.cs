@@ -18,5 +18,13 @@ namespace WebAdmin.Controllers
             ViewData["BillsList"] = BillDataAccess.getListBillByStoreID(UserCurrent.StoreId);
             return View("Management");
         }
+
+        [HttpPost]
+        public ActionResult Detail(int BillId)
+        {
+            ViewData["Bill"] = BillDataAccess.getBillByBillId(BillId);
+            ViewData["BillDetails"] = BillDataAccess.getListBillDetailByBillId(BillId);
+            return View("Detail");
+        }
     }
 }

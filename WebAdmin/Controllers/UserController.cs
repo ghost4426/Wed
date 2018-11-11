@@ -49,7 +49,7 @@ namespace WebAdmin.Controllers
             String address = user.Address;
             String passWord = Password;
             int storeId = user.StoreId;
-            int roleId = user.RoleId;
+            int roleId = 2;
 
             UserDataAcess.addUser(userName, fullName, address, storeId, roleId, passWord);
 

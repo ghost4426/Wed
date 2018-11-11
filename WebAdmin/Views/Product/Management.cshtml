@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "User Management";
+    ViewBag.Title = "Product Management";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var ProductList = ViewData["ProdutsList"] as List<WebAdmin.Models.Product>;
-}
+}   
 
 
 <div class="row">
@@ -29,7 +29,7 @@
                         @for (int i = 0; i < ProductList.Count; i++)
                         {
                             var isVal = "";
-                            if (ProductList[i].IsAvailable == 0)
+                            if (ProductList[i].IsAvailable == 1)
                             {
                                 isVal = "True";
                             }
@@ -158,9 +158,9 @@
         $("#TypeId").val(type);
         $("#ImgKey").val(imgKey);
         if (isVal == 1) {
-            $("#IsAvailable").val(0)
-        } else {
             $("#IsAvailable").val(1)
+        } else {
+            $("#IsAvailable").val(0)
         }
     }
 </script>
