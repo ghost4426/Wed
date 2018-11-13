@@ -15,9 +15,19 @@ namespace WebAdmin.Controllers
         public ActionResult Index()
         {
             User UserCurrent = Session["UserCurrent"] as User;
-            ViewData["OrdersList"] = OrderDataAcess.getOrderDetailByStoreId(UserCurrent.StoreId);
+            ViewData["OrdersList"] = OrderDataAcess.getListOrder(UserCurrent.StoreId);
 
             return View("Management");
+        }
+
+        [HttpPost]
+        public ActionResult Detail(int OrderId)
+        {
+                
+            ViewData["OrderDetails"] = OrderDataAcess.getListOrderDetail(OrderId);
+            ViewData["Order"] = OrderDataAcess.getOrderByOrderId(OrderId);
+         
+            return View("Detail");
         }
     }
 }

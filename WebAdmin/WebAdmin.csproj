@@ -4455,6 +4455,7 @@
     <Content Include="Views\Bill\Management.cshtml" />
     <Content Include="Views\Order\Management.cshtml" />
     <Content Include="Views\Bill\Detail.cshtml" />
+    <Content Include="Views\Order\Detail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

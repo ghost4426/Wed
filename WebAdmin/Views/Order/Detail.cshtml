@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var OrderDetails = ViewData["OrderDetails"] as List<WebAdmin.Models.Order>;
+    var Order = ViewData["Order"] as WebAdmin.Models.Order;
+}
+
+<div class="x_panel">
+    <div class="x_title">
+        <h2>Order Detail</h2>
+        <div class="clearfix"></div>
+    </div>
+    <div class="x_content">
+
+        <section class="content invoice">
+            <!-- title row -->
+            <div class="row">
+                <div class="col-xs-12 invoice-header">
+                    <h1>
+                        Table: @Order.TableName
+                        <small class="pull-right">Date: @string.Format("{0:g}", Order.DateCreate)</small>
+                    </h1>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- info row -->
+            <!-- /.row -->
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-xs-12 table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Qty</th>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ for (int i = 0; i < OrderDetails.Count; i++)
+                                {
+                                    <tr>
+                                        <td>@OrderDetails[i].Quantity</td>
+                                        <td>@OrderDetails[i].ProductName</td>
+                                        <td>
+                                            @string.Format("{0:C0}",OrderDetails[i].ProductPrice)
+                                        </td>
+                                        <td> @string.Format("{0:C0}", OrderDetails[i].Price)</td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+
+            <div class="row">
+                <!-- accepted payments column -->
+                <!-- /.col -->
+                <div class="col-xs-6">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th style="width:50%"><h3>Total:</h3></th>
+                                    <td><h3>@string.Format("{0:C0}", Order.Total)</h3></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+            <!-- this row will not appear when printing -->
+        </section>
+    </div>
+</div>
+
